@@ -1,0 +1,29 @@
+trigger:
+   - master
+variables:
+   group: '  "
+   name: 
+   value:
+pool:
+   vmImage: 'ubuntu-latest'
+resources:
+stages:
+   - stage: build
+     displayName: 'build 
+     jobs:
+       steps:
+         - task: maven
+   - stage: deploy
+     displayName: deploy
+     jobs:
+       - deployment:
+         environment: 'dev'
+         strategy:
+            runceOnce:
+               steps:
+                  - task:
+
+      
+
+           
+           
