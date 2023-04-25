@@ -14,11 +14,12 @@ stages:
         platform: 'Any CPU'
         configuration: 'Release'
 #above Package location is artifactstaging directory use the same location to publish artifacts
- #   - task: CopyFiles@2
- #     displayName: 'Copy scripts'
- #     inputs:
- #       contents: 'scripts/**'
- #       targetFolder: '$(Build.ArtifactStagingDirectory)'
+    - task: CopyFiles@2
+      displayName: 'Copy scripts'
+      inputs:
+        contents: 'scripts/**'
+        targetFolder: '$(Build.ArtifactStagingDirectory)'
+ #it publish the artifacts in the pipeline itself
    - task: PublishBuildArtifacts@1
      inputs:
        pathToPublish: '$(Build.ArtifactStagingDirectory)'
@@ -31,11 +32,10 @@ stages:
     pool:
       vmImage: 'windows-latest'
     steps:
-    - download: current
-      artifact: drop
-    - task: PowerShell@2
+    - task: VSTEST@2
       inputs:
-        filePath: '$(Pipeline.Workspace)\drop\test.ps1'
+        platform: 'Any CPU'
+        configuration: 'Release
 - stage: Deploy
   displayName: Deploy VSBuild
   dependsOn: Build
