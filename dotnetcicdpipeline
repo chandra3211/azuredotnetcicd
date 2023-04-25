@@ -13,12 +13,12 @@ stages:
         msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
         platform: 'Any CPU'
         configuration: 'Release'
-
-    - task: CopyFiles@2
-      displayName: 'Copy scripts'
-      inputs:
-        contents: 'scripts/**'
-        targetFolder: '$(Build.ArtifactStagingDirectory)'
+#above Package location is artifactstaging directory use the same location to publish artifacts
+ #   - task: CopyFiles@2
+ #     displayName: 'Copy scripts'
+ #     inputs:
+ #       contents: 'scripts/**'
+ #       targetFolder: '$(Build.ArtifactStagingDirectory)'
    - task: PublishBuildArtifacts@1
      inputs:
        pathToPublish: '$(Build.ArtifactStagingDirectory)'
